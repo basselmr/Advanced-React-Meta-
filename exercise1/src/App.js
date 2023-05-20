@@ -22,6 +22,16 @@ const desserts = [
     calories: 600,
     createdAt: "2022-01-04",
   },
+  {
+    name: "Salted chocolate & hazelnut brownies",
+    calories: 100,
+    createdAt: "2022-01-04",
+  },
+  {
+    name: "Peach Melba pie",
+    calories: 1000,
+    createdAt: "2022-01-04",
+  },
 ];
 
 function App() {
