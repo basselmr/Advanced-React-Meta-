@@ -19,18 +19,46 @@ function App() {
   const [role, setRole] = useState("role");
 
   const getIsFormValid = () => {
-    // Implement this function
+    if (firstName == "" || !validateEmail(email) || password.value.length < 8 || role == "role") {
+      return false;
+    }
     return true;
   };
 
   const clearForm = () => {
-    // Implement this function
+    setFirstName('')
+    setLastName('')
+    setEmail('')
+    setPassword({ value: "", isTouched: false })
+    setRole("role")
   };
+  const onfirstnamechangedHandler = (e) => {
+    setFirstName(e.target.value);
+  }
+  const onlastnamechangedHandler = (e) => {
+    setLastName(e.target.value);
+  }
+  const onemailchangedHandler = (e) => {
+    setEmail(e.target.value);
+  }
+  const onpasswordchangedHandler = (e) => {
+    setPassword({ value: e.target.value, isTouched: true })
+  }
 
-  const handleSubmit = () => {
+  const onrolechangedHandler = (e) => {
+    setRole(e.target.value)
+
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
     alert("Account created!");
     clearForm();
   };
+  const showPasswordErrorMessage = () => {
+    if (password.isTouched && password.value.length < 8) {
+      return PasswordErrorMessage();
+    }
+  }
 
   return (
     <div className="App">
@@ -41,29 +69,31 @@ function App() {
             <label>
               First name <sup>*</sup>
             </label>
-            <input placeholder="First name" />
+            <input tyep="text" placeholder="First name" value={firstName} onChange={onfirstnamechangedHandler} />
           </div>
           <div className="Field">
             <label>Last name</label>
-            <input placeholder="Last name" />
+            <input type="text" placeholder="Last name" value={lastName} onChange={onlastnamechangedHandler} />
           </div>
           <div className="Field">
             <label>
               Email address <sup>*</sup>
             </label>
-            <input placeholder="Email address" />
+            <input type="text" placeholder="Email address" value={email} onChange={onemailchangedHandler} />
           </div>
           <div className="Field">
             <label>
               Password <sup>*</sup>
             </label>
-            <input placeholder="Password" />
+            <input type="password" placeholder="Password" value={password.value} onChange={onpasswordchangedHandler} />
+            {/*() => (password.isTouched && password.value.length < 8) ? <PasswordErrorMessage /> : null*/}
+            {showPasswordErrorMessage()}
           </div>
           <div className="Field">
             <label>
               Role <sup>*</sup>
             </label>
-            <select>
+            <select value={role} onChange={onrolechangedHandler}>
               <option value="role">Role</option>
               <option value="individual">Individual</option>
               <option value="business">Business</option>
