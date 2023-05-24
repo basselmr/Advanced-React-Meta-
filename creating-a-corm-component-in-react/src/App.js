@@ -69,23 +69,23 @@ function App() {
             <label>
               First name <sup>*</sup>
             </label>
-            <input tyep="text" placeholder="First name" value={firstName} onChange={onfirstnamechangedHandler} />
+            <input tyep="text" placeholder="First name" value={firstName} onChange={onfirstnamechangedHandler} minLength="3" />
           </div>
           <div className="Field">
             <label>Last name</label>
-            <input type="text" placeholder="Last name" value={lastName} onChange={onlastnamechangedHandler} />
+            <input type="text" placeholder="Last name" value={lastName} onChange={onlastnamechangedHandler} minLength="3" maxLength="60" required/>
           </div>
           <div className="Field">
             <label>
               Email address <sup>*</sup>
             </label>
-            <input type="text" placeholder="Email address" value={email} onChange={onemailchangedHandler} />
+            <input type="email" placeholder="Email address" value={email} onChange={onemailchangedHandler} required/>
           </div>
           <div className="Field">
             <label>
               Password <sup>*</sup>
             </label>
-            <input type="password" placeholder="Password" value={password.value} onChange={onpasswordchangedHandler} />
+            <input type="password" placeholder="Password" value={password.value} onChange={onpasswordchangedHandler} minLength="3" maxLength="60" required />
             {/*() => (password.isTouched && password.value.length < 8) ? <PasswordErrorMessage /> : null*/}
             {showPasswordErrorMessage()}
           </div>
