@@ -42,8 +42,12 @@ function App() {
     setEmail(e.target.value);
   }
   const onpasswordchangedHandler = (e) => {
-    setPassword({ value: e.target.value, isTouched: true })
+    setPassword({ ...password, value: e.target.value })
   }
+  const onpasswordBlurHandler = (e) => {
+    setPassword({ ...password, isTouched: true })
+  }
+
 
   const onrolechangedHandler = (e) => {
     setRole(e.target.value)
@@ -85,9 +89,10 @@ function App() {
             <label>
               Password <sup>*</sup>
             </label>
-            <input type="password" placeholder="Password" value={password.value} onChange={onpasswordchangedHandler} />
+            <input type="password" placeholder="Password" value={password.value} onChange={onpasswordchangedHandler} onBlur={onpasswordBlurHandler} />
             {/*() => (password.isTouched && password.value.length < 8) ? <PasswordErrorMessage /> : null*/}
-            {showPasswordErrorMessage()}
+            {/*showPasswordErrorMessage()*/}
+            {password.isTouched && password.value.length < 8 ? (<PasswordErrorMessage />) : null}
           </div>
           <div className="Field">
             <label>
