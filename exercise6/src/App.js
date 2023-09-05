@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 export default function App() {
   const [day, setDay] = useState("Monday");
+  console.log("0 day:", day)
   const prevDay = usePrevious(day);
+  console.log("3 prevday:", prevDay)
   const getNextDay = () => {
     if (day === "Monday") {
       setDay("Tuesday")
@@ -14,13 +16,23 @@ export default function App() {
     } else if (day === "Friday") {
       setDay("Monday")
     }
-    useEffect(() => {
-      const val = ref.current
-      
-    },[])
   }
+  function usePrevious(val) {
+    console.log("1 val:", val)
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = val;
+      console.log("5 ref.current", ref.current)
+    }, [val]);
+    console.log("2 ref.current", ref.current)
+    return ref.current;
+  }
+  console.log("4 prevDay:", prevDay)
+  useEffect(() => {
+    console.log("6 run useEffect")
+  })
   return (
-    <div style={{padding: "40px"}}>
+    <div style={{ padding: "40px" }}>
       <h1>
         Today is: {day}<br />
         {
@@ -35,11 +47,4 @@ export default function App() {
     </div>
   );
 }
-function usePrevious(val) {
- const ref = useRef();
-  useEffect(() => {
-    ref.current = val;
-  }, [val]);
-  return ref.current;
 
-}
